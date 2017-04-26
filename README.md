@@ -1,4 +1,5 @@
 # react-lifecycle
+Understanding the React Component Lifecycle
 
 ## Installation
 ```bash
