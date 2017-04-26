@@ -20,3 +20,7 @@ $ npm start
    │                                                  │
    └──────────────────────────────────────────────────┘
 ```
+
+## :star: Credits
+Adapted and expanded from: 
+* [busypeoples.github.io](http://busypeoples.github.io/post/react-component-lifecycle/)
