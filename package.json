@@ -1,0 +1,25 @@
+{
+  "name": "react-component-lifecycle",
+  "version": "1.0.0",
+  "description": "Understanding the React Component Lifecycle",
+  "main": "script.js",
+  "scripts": {
+    "prestart": "npm run jsx",
+    "start": "serve .",
+    "jsx": "jsx ./script.jsx > ./script.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clarketm/react-lifecycle.git"
+  },
+  "keywords": [
+    "react",
+    "lifecycle"
+  ],
+  "author": "Travis Clarke",
+  "license": "MIT",
+  "devDependencies": {
+    "react-tools": "^0.13.3",
+    "serve": "^5.1.4"
+  }
+}
