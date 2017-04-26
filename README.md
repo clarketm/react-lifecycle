@@ -1,6 +1,8 @@
 # react-lifecycle
 Understanding the React Component Lifecycle
 
+![component lifecycle screenshot](https://github.com/clarketm/react-lifecycle/blob/master/screenshot.png)
+
 ## Installation
 ```bash
 $ npm install
