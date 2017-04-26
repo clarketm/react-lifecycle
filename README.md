@@ -1,5 +1,7 @@
 # [react-lifecycle](https://www.travismclarke.com/react-lifecycle/)
-Understanding the React Component Lifecycle - [demo](https://www.travismclarke.com/react-lifecycle/)
+Understanding the React Component Lifecycle
+
+#### [Live Demo](https://www.travismclarke.com/react-lifecycle/)
 
 ![component lifecycle screenshot](https://github.com/clarketm/react-lifecycle/blob/master/screenshot.png)
 
