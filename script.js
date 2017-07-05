@@ -4,66 +4,7 @@ var appEl = document.getElementById('app');
 
 writeToScreen('Initial', 'primary');
 
-var Welcome = React.createClass({displayName: "Welcome",
-  getInitialState: function () {
-    writeToScreen('GetInitialState', 'info');
-    return {foo: 1};
-  },
-
-  getDefaultProps: function () {
-    writeToScreen('GetDefaultProps', 'info');
-    return {bar: 1};
-  },
-
-  update: function () {
-    writeToScreen('Updating State', 'primary');
-    this.setState({foo: this.state.foo + 1});
-  },
-
-  render: function () {
-    writeToScreen('Render', 'success');
-    return (React.createElement("div", null, 
-      "This.state.foo: ", this.state.foo, " ", React.createElement("br", null), 
-      "This.state.bar: ", this.props.bar, 
-      React.createElement("br", null), 
-      React.createElement("hr", null), 
-      React.createElement("button", {className: "btn btn-success", 
-        onClick: this.update}, 
-        "Update State"
-      )
-    ));
-  },
-
-  componentWillMount: function () {
-    writeToScreen('ComponentWillMount', 'warning');
-  },
-
-  componentDidMount: function () {
-    writeToScreen('ComponentDidMount', 'warning');
-  },
-
-  shouldComponentUpdate: function () {
-    writeToScreen('ShouldComponentUpdate', 'info');
-    return true;
-  },
-
-  componentWillReceiveProps: function (nextProps) {
-    writeToScreen('ComponentWillRecieveProps', 'warning');
-  },
-
-  componentWillUpdate: function () {
-    writeToScreen('ComponentWillUpdate', 'warning');
-  },
-
-  componentDidUpdate: function () {
-    writeToScreen('ComponentDidUpdate', 'warning');
-  },
-
-  componentWillUnmount: function () {
-    writeToScreen('componentWillUnmount', 'danger');
-  }
-});
-
+var Welcome;
 var App = React.createClass({displayName: "App",
   getInitialState: function () {
     return {id: 1};
@@ -100,10 +41,73 @@ var App = React.createClass({displayName: "App",
 });
 
 function domRender() {
+  Welcome = createWelcome();
   ReactDOM.render(
     React.cloneElement(React.createElement(App, null)),
     document.getElementById('app')
   );
+}
+
+function createWelcome() {
+  return React.createClass({
+    getInitialState: function () {
+      writeToScreen('GetInitialState', 'info');
+      return {foo: 1};
+    },
+
+    getDefaultProps: function () {
+      writeToScreen('GetDefaultProps', 'info');
+      return {bar: 1};
+    },
+
+    update: function () {
+      writeToScreen('Updating State', 'primary');
+      this.setState({foo: this.state.foo + 1});
+    },
+
+    render: function () {
+      writeToScreen('Render', 'success');
+      return (React.createElement("div", null, 
+        "This.state.foo: ", this.state.foo, " ", React.createElement("br", null), 
+        "This.state.bar: ", this.props.bar, 
+        React.createElement("br", null), 
+        React.createElement("hr", null), 
+        React.createElement("button", {className: "btn btn-success", 
+          onClick: this.update}, 
+          "Update State"
+        )
+      ));
+    },
+
+    componentWillMount: function () {
+      writeToScreen('ComponentWillMount', 'warning');
+    },
+
+    componentDidMount: function () {
+      writeToScreen('ComponentDidMount', 'warning');
+    },
+
+    shouldComponentUpdate: function () {
+      writeToScreen('ShouldComponentUpdate', 'info');
+      return true;
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+      writeToScreen('ComponentWillRecieveProps', 'warning');
+    },
+
+    componentWillUpdate: function () {
+      writeToScreen('ComponentWillUpdate', 'warning');
+    },
+
+    componentDidUpdate: function () {
+      writeToScreen('ComponentDidUpdate', 'warning');
+    },
+
+    componentWillUnmount: function () {
+      writeToScreen('componentWillUnmount', 'danger');
+    }
+  });
 }
 
 function restart() {
