@@ -1,5 +1,6 @@
 var restartBtn = document.getElementById('restart');
 var screenEl = document.getElementById('screen');
+var appEl = document.getElementById('app');
 
 writeToScreen('Initial', 'primary');
 
@@ -100,19 +101,20 @@ var App = React.createClass({
 
 function domRender() {
   ReactDOM.render(
-    <App />,
+    React.cloneElement(<App />),
     document.getElementById('app')
   );
 }
 
 function restart() {
-  emptyScreen();
+  emptyApp();
   writeToScreen('Initial', 'primary');
   domRender();
 }
 
-function emptyScreen() {
+function emptyApp() {
   screenEl.innerHTML = '';
+  appEl.innerHTML = '';
 }
 
 function writeToScreen(msg, level) {

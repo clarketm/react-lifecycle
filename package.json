@@ -4,9 +4,9 @@
   "description": "Understanding the React Component Lifecycle",
   "main": "script.js",
   "scripts": {
-    "prestart": "npm run jsx",
-    "start": "serve .",
-    "jsx": "jsx ./script.jsx > ./script.js"
+    "jsx": "jsx ./script.jsx > ./script.js",
+    "jsx:watch": "jsx ./script.jsx --watch > ./script.js",
+    "start": "serve ."
   },
   "repository": {
     "type": "git",
