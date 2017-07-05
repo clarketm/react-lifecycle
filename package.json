@@ -4,8 +4,8 @@
   "description": "Understanding the React Component Lifecycle",
   "main": "script.js",
   "scripts": {
-    "jsx": "jsx ./script.jsx > ./script.js",
-    "jsx:watch": "jsx ./script.jsx --watch > ./script.js",
+    "jsx": "babel script.jsx --plugins 'transform-react-jsx' --watch --out-file script.js",
+    "jsx:watch": "npm run jsx --watch",
     "start": "serve ."
   },
   "repository": {
@@ -19,6 +19,8 @@
   "author": "Travis Clarke",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
     "react-tools": "^0.13.3",
     "serve": "^5.1.4"
   }
