@@ -4,8 +4,8 @@
   "description": "Understanding the React Component Lifecycle",
   "main": "script.js",
   "scripts": {
-    "jsx": "babel script.jsx --plugins 'transform-react-jsx' --watch --out-file script.js",
-    "jsx:watch": "npm run jsx --watch",
+    "jsx": "babel script.jsx --plugins 'transform-react-jsx' --out-file script.js",
+    "jsx:watch": "npm run jsx -- --watch",
     "start": "serve ."
   },
   "repository": {
