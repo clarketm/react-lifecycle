@@ -4,8 +4,10 @@ var appEl = document.getElementById('app');
 
 writeToScreen('Initial', 'primary');
 
-var Welcome;
-var App = React.createClass({
+var StateProps;
+var Error;
+var ErrorBoundary;
+var App = window.createReactClass({
   getInitialState: function () {
     return { id: 1 };
   },
@@ -25,39 +27,38 @@ var App = React.createClass({
       'div',
       null,
       React.createElement('hr', null),
-      React.createElement(Welcome, { bar: this.state.id }),
-      React.createElement('hr', null),
+      React.createElement(StateProps, { bar: this.state.id }),
+      '\xA0\xA0\xA0',
       React.createElement(
         'button',
-        { type: 'button', className: 'btn btn-primary',
-          onClick: this.update },
+        { type: 'button', className: 'btn btn-primary', onClick: this.update },
         'Update Props'
       ),
       React.createElement('hr', null),
       React.createElement(
         'button',
-        { type: 'button', className: 'btn btn-danger',
-          onClick: this.unmount },
+        { type: 'button', className: 'btn btn-danger', onClick: this.unmount },
         'Unmount'
+      ),
+      '\xA0\xA0\xA0',
+      React.createElement(
+        ErrorBoundary,
+        null,
+        React.createElement(Error, null)
       )
     );
   }
 });
 
-function domRender() {
-  Welcome = createWelcome();
-  ReactDOM.render(React.cloneElement(React.createElement(App, null)), document.getElementById('app'));
-}
-
-function createWelcome() {
-  return React.createClass({
+function createStateProps() {
+  return window.createReactClass({
     getInitialState: function () {
-      writeToScreen('GetInitialState', 'info');
-      return { foo: 1 };
+      writeToScreen('constructor / getInitialState', 'info');
+      return { foo: 1, error: false };
     },
 
     getDefaultProps: function () {
-      writeToScreen('GetDefaultProps', 'info');
+      writeToScreen('defaultProps / getDefaultProps', 'info');
       return { bar: 1 };
     },
 
@@ -66,60 +67,110 @@ function createWelcome() {
       this.setState({ foo: this.state.foo + 1 });
     },
 
-    render: function () {
-      writeToScreen('Render', 'success');
-      return React.createElement(
-        'div',
-        null,
-        'This.state.foo: ',
-        this.state.foo,
-        ' ',
-        React.createElement('br', null),
-        'This.state.bar: ',
-        this.props.bar,
-        React.createElement('br', null),
-        React.createElement('hr', null),
-        React.createElement(
-          'button',
-          { className: 'btn btn-success',
-            onClick: this.update },
-          'Update State'
-        )
-      );
-    },
-
     componentWillMount: function () {
-      writeToScreen('ComponentWillMount', 'warning');
+      writeToScreen('componentWillMount', 'warning');
     },
 
     componentDidMount: function () {
-      writeToScreen('ComponentDidMount', 'warning');
+      writeToScreen('componentDidMount', 'warning');
     },
 
     shouldComponentUpdate: function () {
-      writeToScreen('ShouldComponentUpdate', 'info');
+      writeToScreen('shouldComponentUpdate', 'info');
       return true;
     },
 
     componentWillReceiveProps: function (nextProps) {
-      writeToScreen('ComponentWillRecieveProps', 'warning');
+      writeToScreen('componentWillRecieveProps', 'warning');
     },
 
     componentWillUpdate: function () {
-      writeToScreen('ComponentWillUpdate', 'warning');
+      writeToScreen('componentWillUpdate', 'warning');
     },
 
     componentDidUpdate: function () {
-      writeToScreen('ComponentDidUpdate', 'warning');
+      writeToScreen('componentDidUpdate', 'warning');
     },
 
     componentWillUnmount: function () {
       writeToScreen('componentWillUnmount', 'danger');
+    },
+
+    render: function () {
+      writeToScreen('render', 'success');
+      return React.createElement(
+        'span',
+        null,
+        'This.state.foo: ',
+        this.state.foo,
+        '\xA0\xA0\xA0\xA0\xA0 This.props.bar: ',
+        this.props.bar,
+        React.createElement('br', null),
+        React.createElement('br', null),
+        React.createElement(
+          'button',
+          { className: 'btn btn-success', onClick: this.update },
+          'Update State'
+        )
+      );
     }
   });
 }
 
+function createError() {
+  return window.createReactClass({
+    getInitialState: function () {
+      return { error: false };
+    },
+
+    error: function () {
+      writeToScreen('Throwing Error', 'primary');
+      this.setState({ error: true });
+    },
+
+    render: function () {
+      if (this.state.error) {
+        throw new Error('error');
+      }
+      return React.createElement(
+        'span',
+        null,
+        React.createElement(
+          'button',
+          { className: 'btn btn-danger', onClick: this.error },
+          'Throw Error'
+        )
+      );
+    }
+  });
+}
+
+function createErrorBoundary() {
+  return window.createReactClass({
+    getInitialState: function () {
+      return { error: false };
+    },
+
+    componentDidCatch: function (error, info) {
+      writeToScreen('componentDidCatch', 'danger');
+      this.setState({ error: true });
+    },
+
+    render: function () {
+      return this.props.children;
+    }
+  });
+}
+
+function domRender() {
+  StateProps = createStateProps();
+  Error = createError();
+  ErrorBoundary = createErrorBoundary();
+  ReactDOM.render(React.cloneElement(React.createElement(App, null)), document.getElementById('app'));
+}
+
 function restart() {
+  ReactDOM.unmountComponentAtNode(document.getElementById('app'));
   emptyApp();
   writeToScreen('Initial', 'primary');
   domRender();
